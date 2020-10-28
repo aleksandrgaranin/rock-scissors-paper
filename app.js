@@ -33,22 +33,32 @@ const getComputerChoice = function () {
   }
 };
 
-const getWInner = function (cChoice, pChoice) {
-  if (cChoice === ROCK && pChoice === PAPER || cChoice === PAPER && pChoice === SCISSORS) {
-    return RESULT_PLAYER_WINS
-  } else if (cChoice === pChoice) {
-    return RESULT_DRAW
-  } else {
-    return RESULT_COMPUTER_WINS
-  }
+const getWInner = (cChoice, pChoice) => {
+  return cChoice === pChoice
+    ? RESULT_DRAW
+    : cChoice === ROCK && pChoice === PAPER ||
+      cChoice === PAPER && pChoice === SCISSORS ||
+      cChoice === SCISSORS && pChoice === ROCK
+    ? RESULT_PLAYER_WINS
+    : RESULT_COMPUTER_WINS;
 }
+
+// const getWInner = function (cChoice, pChoice) {
+//   if (cChoice === ROCK && pChoice === PAPER || cChoice === PAPER && pChoice === SCISSORS) {
+//     return RESULT_PLAYER_WINS
+//   } else if (cChoice === pChoice) {
+//     return RESULT_DRAW
+//   } else {
+//     return RESULT_COMPUTER_WINS
+//   }
+// }
 
 startGameBtn.addEventListener('click', function () {
   console.log('Game is starting...');
   const playerChoice = getPlayerChoice();
   const computerChoice = getComputerChoice();
-  console.log(playerChoice);
-  console.log(computerChoice);
+  console.log(`Player Choice ${playerChoice}`);
+  console.log(`Computer Choice ${computerChoice}`);
   const winner = getWInner(computerChoice, playerChoice);
   console.log(winner)
 });
